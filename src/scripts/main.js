@@ -26,6 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const newRow = table.insertRow();
     const columnCount = table.rows[0].cells.length;
 
+    if (table.rows.length > maxSize) {
+      return;
+    }
+
     for (let i = 0; i < columnCount; i++) {
       newRow.insertCell();
     }
@@ -40,6 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function appendColumn() {
+    if (table.rows[0].cells.length > maxSize) {
+      return;
+    }
+
     Array.from(table.rows).forEach((row) => row.insertCell());
     updateButtonStates();
   }
@@ -56,6 +64,5 @@ document.addEventListener('DOMContentLoaded', () => {
   appendColumnButton.addEventListener('click', appendColumn);
   removeColumnButton.addEventListener('click', removeColumn);
 
-  // Initialize button states based on starting table size
   updateButtonStates();
 });
