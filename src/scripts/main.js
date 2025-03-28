@@ -23,12 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function appendRow() {
-    const newRow = table.insertRow();
-    const columnCount = table.rows[0].cells.length;
+    if (table.rows.length >= maxSize) {
+      appendRowButton.disabled = true;
 
-    if (table.rows.length > maxSize) {
       return;
     }
+
+    const newRow = table.insertRow();
+    const columnCount = table.rows[0].cells.length;
 
     for (let i = 0; i < columnCount; i++) {
       newRow.insertCell();
@@ -44,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function appendColumn() {
-    if (table.rows[0].cells.length > maxSize) {
+    if (table.rows[0].cells.length >= maxSize) {
+      appendColumnButton.disabled = true;
+
       return;
     }
 
